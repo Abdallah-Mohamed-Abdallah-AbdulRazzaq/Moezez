@@ -96,9 +96,30 @@ nav ul li a.active {
 }
 
 /* --- القسم الرئيسي (Hero) --- */
-.hero {
+/* .hero {
     min-height: 100vh;
     background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+} */
+
+/* --- القسم الرئيسي (Hero) --- */
+.hero {
+    min-height: 100vh;
+    
+    /* (السطر القديم الذي سنقوم بتعديله) */
+    /* background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%); */
+
+    /* --- (جديد) خلفية متغيرة --- */
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color), var(--primary-color), var(--secondary-color));
+    background-size: 400% 400%; /* (جعل الخلفية أكبر لتتحرك) */
+    animation: gradient-animation 15s ease infinite; /* (تطبيق الأنميشن) */
+    /* --- (انتهى التعديل) --- */
+    
     color: var(--white-color);
     display: flex;
     justify-content: center;
@@ -370,4 +391,86 @@ footer .copyright {
     .timeline-item::after {
         right: 5px;
     }
+}
+
+/* --- (جديد) أنميشن خلفية الـ Hero --- */
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+/* --- (إضافة 1) أنميشن لنصوص الـ Hero وزر الـ CTA --- */
+
+/* كود الأنميشن للصعود */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* كود الأنميشن للنبض */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
+/* تطبيق الأنميشن على عناصر الـ Hero */
+.hero-content h1 {
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0; /* (البدء مخفياً) */
+}
+
+.hero-content p {
+    animation: fadeInUp 0.8s ease-out 0.3s forwards; /* (تأخير 0.3 ثانية) */
+    opacity: 0; /* (البدء مخفياً) */
+}
+
+.hero-content .cta-button {
+    animation: fadeInUp 0.8s ease-out 0.6s forwards, pulse 2s infinite 1.5s; /* (تأخير 0.6 ثانية للظهور، ثم بدء النبض) */
+    opacity: 0; /* (البدء مخفياً) */
+}
+
+/* --- (إضافة 2) تجهيز البطاقات لتأثير الـ 3D Tilt --- */
+
+.card {
+    /* (هذا سيجعل حركة العودة سلسة عند مغادرة الماوس) */
+    transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    /* (للحفاظ على المنظور ثلاثي الأبعاد) */
+    transform-style: preserve-3d;
+}
+
+/* --- (إضافة 3) أنميشن لنقاط خارطة الطريق --- */
+
+/* (الحالة الأولية للدائرة: مخفية) */
+.timeline-item::after {
+    transform: scale(0);
+    transition: transform 0.3s ease 0.3s; /* (تأخير بسيط بعد ظهور المحتوى) */
+}
+
+/* (الحالة عند الظهور: تكبير الدائرة) */
+.timeline-item.show::after {
+    transform: scale(1);
 }
