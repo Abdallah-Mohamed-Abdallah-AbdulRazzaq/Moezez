@@ -474,3 +474,57 @@ footer .copyright {
 .timeline-item.show::after {
     transform: scale(1);
 }
+
+
+
+
+
+
+
+
+/* --- تنسيق الأزرار الإضافية في الـ Hero --- */
+
+.hero-grid-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* عمودين */
+    gap: 15px;
+    margin-top: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    
+    /* إعدادات الأنميشن للظهور */
+    opacity: 0; 
+    animation: fadeInUp 0.8s ease-out 1s forwards; /* تأخير 1 ثانية ليظهر بعد الزر الرئيسي */
+}
+
+.hero-link-btn {
+    background: rgba(255, 255, 255, 0.15); /* خلفية شفافة قليلاً */
+    backdrop-filter: blur(5px); /* تأثير ضبابي خلف الزر */
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: var(--white-color);
+    padding: 12px 15px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-link-btn:hover {
+    background: var(--white-color);
+    color: var(--primary-color);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* جعل الأزرار تحت بعضها في شاشات الموبايل */
+@media (max-width: 600px) {
+    .hero-grid-links {
+        grid-template-columns: 1fr; /* عمود واحد */
+    }
+}
